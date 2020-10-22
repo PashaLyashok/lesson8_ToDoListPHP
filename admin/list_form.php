@@ -1,20 +1,17 @@
 <?php  
     require_once '../functions/functions.php';
-    global $status;
-    //print_r($_POST);
-    //echo $status;
+    //var_dump($_POST);
     
-    if (!empty($_POST['check']) && $status == 0) {
-        $status = 1;
-        header('Location: ../pages/user_page.php');
+    
+    if($_POST['change_status'] === '') {
+        Change_status();
     }
 
-    if (!empty($_POST['check']) && $status == 1) {
-        $status = 0;
-       header('Location: ../pages/user_page.php');
+    if($_POST['remove_task'] === '') {
+        Remove_task();
     }
-
-    if (empty($_POST['check'])) {
-        header('Location: ../pages/user_page.php');
+    
+    if($_POST['update_task'] === '') {
+        Update_task();
     }
 ?>
