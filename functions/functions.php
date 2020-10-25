@@ -63,7 +63,8 @@
                     <input type="hidden" name="id_post" value="'. $one['id'] .'" >
                     <li><strong>Номер человека</strong>: '.$one['userId'].'</li>
                     <li><Strong>Номер задачи</strong>: '.$one['id'].'</li>
-                    <li><strong>Название задачи</strong>: '.$one['title'].'</li>
+                    <li><strong>Задача: </strong>: '.$one['title'].'</li>
+                    <li><input class="update_inp" type="text" name="update" value="'. $one['title'] .'"/></li>
                     <li><input '. ((int)$one['completed'] == 1 ? 'checked' : '') .' class="box" type="checkbox" name="id"/><strong>Статус задачи</Strong>: '.$status.'</li>
                     <li>
                     <button name="change_status" class="btn_list">Изменить статус задачи</button>
@@ -77,18 +78,36 @@
         
     }
 
-    function Remove_task() {
+    
+    function Update_task() {
+        
         if(file_exists('../json/data.json') || filesize('../json/data.json') > 0) {
 
             $data_str = file_get_contents('../json/data.json');
             $data_json = json_decode($data_str, true);
 
             foreach($data_json as &$one) {
+                if(isset($_POST['update']) && $one['id'] == $_POST['id_post']) {
+                    $one['title'] = $_POST['update'];
+                }
+            }
+            $result = json_encode($data_json);
+            file_put_contents('../json/data.json', $result);
+            header('Location: ../pages/user_page.php');
+            exit;
+        } 
+    }
+
+    function Remove_task() {
+        if(file_exists('../json/data.json') || filesize('../json/data.json') > 0) {
+
+            $data_str = file_get_contents('../json/data.json');
+            $data_json = json_decode($data_str, true);
+
+
+            foreach($data_json as $key => $one) {
                 if ($one['id'] == $_POST['id_post']) {
-                    unset($one['userId']);
-                    unset($one['id']);
-                    unset($one['title']);
-                    unset($one['completed']);
+                    unset($data_json[$key]);
                 }
             }
             
@@ -125,9 +144,6 @@
         }
     }
 
-    function Update_task() {
-        echo 'Update';
-    }
        
 
         

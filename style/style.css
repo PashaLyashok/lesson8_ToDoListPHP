@@ -82,3 +82,11 @@ body {
     padding: 5px 10px;
     background-color:khaki;
 }
+
+.list_form li {
+    margin: 15px 15px;
+}
+.list_form .update_inp {   
+    width: 43%;
+    padding: 10px 15px;
+}
