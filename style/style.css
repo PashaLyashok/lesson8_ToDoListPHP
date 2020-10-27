@@ -90,3 +90,24 @@ body {
     width: 43%;
     padding: 10px 15px;
 }
+
+.add_form {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin-top: 100px;
+}
+
+.add_form p {
+    margin-left: 15%;
+}
+
+.add_form input {
+    margin-left: 2%;
+    width: 60%;
+    padding: 7px 10px;
+}
+.add_form button {
+    width: 50%;
+    padding: 5px 10px;
+    background-color:khaki;
+}
