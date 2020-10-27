@@ -14,4 +14,8 @@
     if(isset($_POST['update_task'])) {
         Update_task();
     }
+
+    if(isset($_POST['btn_add']) && !empty($_POST['new_task'])) {
+        Add_Task();
+    }
 ?>

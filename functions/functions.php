@@ -55,13 +55,14 @@
                 'title' => $_POST['new_task'],
                 'completed' => false
             ];
-            print_r($new_post);
-            array_push($data_json, $new_post);
+            array_unshift($data_json, $new_post);
             
             $result = json_encode($data_json);
             file_put_contents('../json/data.json', $result);
-            header('Location: /');
-            //echo 'egege';
+
+            header('Location: ../pages/user_page.php');
+            exit;
+            
         }
     }
 
@@ -79,13 +80,12 @@
                 $status = (int)$one['completed'];
                 if ($status == 0) $status = 'не выполнена';
                 else $status = 'выполнена';
-
+                //<li><Strong>Номер задачи</strong>: '.$one['id'].'</li>
                 if ($one['userId'] == $_COOKIE['user_id']) {
                     echo '<form class="list_form" method="POST" action="../admin/list_form.php">
                     <ul>
                     <input type="hidden" name="id_post" value="'. $one['id'] .'" >
-                    <li><strong>Номер человека</strong>: '.$one['userId'].'</li>
-                    <li><Strong>Номер задачи</strong>: '.$one['id'].'</li>
+                    <li><strong>Номер человека</strong>: '.$one['userId'].'</li> 
                     <li><strong>Задача </strong>: '.$one['title'].'</li>
                     <li><input class="update_inp" type="text" name="update" value="'. $one['title'] .'"/></li>
                     <li><input '. ((int)$one['completed'] == 1 ? 'checked' : '') .' class="box" type="checkbox" name="id"/><strong>Статус задачи</Strong>: '.$status.'</li>
@@ -98,7 +98,6 @@
                     </form>';
                 }
         }   
-        exit;
     }
 
     
@@ -170,11 +169,7 @@
     }
 
     function Show_AddForm() {
-            echo '<form class="add_form" action="../pages/user_page.php" method="POST">
-            <p><Strong>Введите вашу задачу</strong>: <input name="new_task"/></p>
-            <input type="hidden" name="new_postId" value="'. uniqid() .'" />
-            <button name="btn_add">Добавить</button>
-            </form>';
+            
         
 print_r($_POST);
     }
