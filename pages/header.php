@@ -18,6 +18,6 @@
                 </div>
                 <div class="header_title">
                     <h1>To Do List <sub>by Pavel Lyashok</sub></h1> 
-                </div>
+                </div> 
             </div>
         </header>
